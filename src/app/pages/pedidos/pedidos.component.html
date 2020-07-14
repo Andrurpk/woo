@@ -1,0 +1,36 @@
+<div>
+    <mat-form-field>
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="buscar" #input>
+      </mat-form-field>
+
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Position Column -->
+        <ng-container matColumnDef="Cliente">
+          <mat-header-cell *matHeaderCellDef> Cliente </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.billing.first_name}}, {{element.billing.last_name}} </mat-cell>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="Operacion">
+          <mat-header-cell *matHeaderCellDef> Metodo de pago </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.payment_method_title}} </mat-cell>
+        </ng-container>
+      
+        <!-- Weight Column -->
+        <ng-container matColumnDef="Pagado">
+          <mat-header-cell *matHeaderCellDef> Pagado </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.total}} </mat-cell>
+        </ng-container>
+      
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="Date">
+          <mat-header-cell *matHeaderCellDef> Fecha Pedido </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.date_created | date :'medium'}} </mat-cell>
+        </ng-container>
+      
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-spinner *ngIf="show"></mat-spinner>
+</div>
